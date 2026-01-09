@@ -25,7 +25,7 @@ jobs:
             --adjust-extension \
             --page-requisites \
             --no-parent \
-            https://developer51709.gt.tc \
+            https://mineogo.is-a.dev \
             -P mirror
 
       - name: Commit changes
