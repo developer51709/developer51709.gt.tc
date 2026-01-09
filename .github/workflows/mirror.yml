@@ -1,0 +1,38 @@
+name: Mirror Website
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"  # runs daily at 3 AM UTC
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Mirror website
+        run: |
+          rm -rf mirror
+          mkdir mirror
+
+          wget \
+            --mirror \
+            --convert-links \
+            --adjust-extension \
+            --page-requisites \
+            --no-parent \
+            https://developer51709.gt.tc \
+            -P mirror
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Automated website mirror" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push
