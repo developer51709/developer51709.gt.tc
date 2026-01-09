@@ -21,12 +21,12 @@ jobs:
         if: ${{ github.event.inputs.mode == 'pull' }}
         uses: SamKirkland/FTP-Deploy-Action@2.0.0
         with:
-          ftp-server: ${{ secrets.FTP_SERVER }}
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: /htdocs/
-          direction: download
+          ftp_server: ${{ secrets.FTP_SERVER }}
+          ftp_username: ${{ secrets.FTP_USERNAME }}
+          ftp_password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: ./
+          remote_dir: /htdocs/
+          method: download
 
       # PUSH MODE: Upload files from GitHub → InfinityFree
       - name: Push to InfinityFree
