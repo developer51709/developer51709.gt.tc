@@ -19,14 +19,12 @@ jobs:
       # PULL MODE: Download files from InfinityFree → GitHub
       - name: Pull from InfinityFree
         if: ${{ github.event.inputs.mode == 'pull' }}
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0
-        with:
-          ftp_server: ${{ secrets.FTP_SERVER }}
-          ftp_username: ${{ secrets.FTP_USERNAME }}
-          ftp_password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: ./
-          remote_dir: /htdocs/
-          method: download
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -e "set ssl:verify-certificate no; mirror --verbose --parallel=2 /htdocs ./; quit" \
+            -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" \
+            ${{ secrets.FTP_SERVER }}
 
       # PUSH MODE: Upload files from GitHub → InfinityFree
       - name: Push to InfinityFree
