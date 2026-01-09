@@ -2,8 +2,8 @@ name: Mirror Website
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * *"  # runs daily at 3 AM UTC
+  # schedule:
+  #   - cron: "0 3 * * *"  # runs daily at 3 AM UTC
 
 jobs:
   mirror:
@@ -25,7 +25,7 @@ jobs:
             --adjust-extension \
             --page-requisites \
             --no-parent \
-            https://mineogo.is-a.dev \
+            https://example.com \
             -P mirror
 
       - name: Commit changes
