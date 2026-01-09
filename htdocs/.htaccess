@@ -1,0 +1,6 @@
+ErrorDocument 500 https://developer51709.gt.tc/500/
+ErrorDocument 404 https://developer51709.gt.tc/404/
+ErrorDocument 403 https://developer51709.gt.tc/403/
+ErrorDocument 400 https://developer51709.gt.tc/400/
+ErrorDocument 401 https://developer51709.gt.tc/401/
+ErrorDocument 503 https://developer51709.gt.tc/503/

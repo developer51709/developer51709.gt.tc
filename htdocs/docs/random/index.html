@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Facts / Jokes / Quotes API Documentation</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; background: #0d1b2a; color: #e0e1dd; margin: 0; padding: 0; line-height: 1.6; }
+    header { background: #1b263b; padding: 20px; text-align: center; border-bottom: 4px solid #415a77; }
+    header h1 { margin: 0; color: #e0e1dd; }
+    main { max-width: 960px; margin: 30px auto; padding: 20px; background: #1b263b; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    h2 { color: #81a1c1; border-bottom: 2px solid #415a77; padding-bottom: 5px; }
+    pre { background: #0d1b2a; padding: 15px; border-radius: 6px; overflow-x: auto; color: #a8dadc; }
+    code { font-family: Consolas, monospace; }
+    .demo { margin-top: 30px; padding: 20px; background: #0d1b2a; border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; margin-top: 6px; color: #e0e1dd; font-size: 14px; }
+    input, select { width: 100%; padding: 8px; margin-top: 6px; border: none; border-radius: 4px; background: #415a77; color: #fff; }
+    button { margin-top: 15px; padding: 10px 20px; background: #81a1c1; border: none; border-radius: 4px; color: #0d1b2a; font-weight: bold; cursor: pointer; }
+    button:hover { background: #a8dadc; }
+    .result { margin-top: 15px; padding: 12px; background: #1b263b; border-radius: 4px; color: #f1faee; word-wrap: break-word; }
+    .json { margin-top: 10px; background: #0d1b2a; border-radius: 6px; padding: 10px; font-family: Consolas, monospace; color: #a8dadc; overflow-x: auto; white-space: pre-wrap; }
+    .note { font-size: 13px; color: #a8dadc; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Random Facts / Jokes / Quotes API Documentation</h1>
+  </header>
+  <main>
+    <h2>Overview</h2>
+    <p>
+      This API returns a random <strong>fact</strong>, <strong>joke</strong>, or <strong>quote</strong>. Choose the type via a parameter and receive a single item in JSON.
+    </p>
+
+    <h2>Endpoint</h2>
+    <p><code>http://developer51709.gt.tc/api/random.php</code></p>
+
+    <h2>Parameters</h2>
+    <ul>
+      <li><code>type</code>: <em>fact</em> | <em>joke</em> | <em>quote</em> (default: <em>fact</em>)</li>
+    </ul>
+
+    <h2>Examples</h2>
+    <h3>Get a random fact</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/random.php?type=fact</code></pre>
+
+    <h3>Get a random joke</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/random.php?type=joke</code></pre>
+
+    <h3>Get a random quote</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/random.php?type=quote</code></pre>
+
+    <h2>Demo</h2>
+    <div class="demo">
+      <form id="apiForm">
+        <div class="grid">
+          <div>
+            <label for="type">Type</label>
+            <select id="type" name="type">
+              <option value="fact">Fact</option>
+              <option value="joke">Joke</option>
+              <option value="quote">Quote</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit">Run API</button>
+      </form>
+
+      <div class="result" id="result">Result will appear here…</div>
+      <div class="json" id="rawJson" hidden></div>
+      <p class="note">Tip: Use this API to add bite-sized content to your Discord bots or website sections.</p>
+    </div>
+  </main>
+
+  <script>
+    const endpoint = 'https://developer51709.gt.tc/api/random.php';
+
+    document.getElementById('apiForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const type = document.getElementById('type').value;
+      const url = endpoint + '?type=' + encodeURIComponent(type);
+
+      const resultEl = document.getElementById('result');
+      const rawJsonEl = document.getElementById('rawJson');
+      resultEl.textContent = 'Working…';
+      rawJsonEl.hidden = true;
+
+      try {
+        const response = await fetch(url);
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        const data = isJson ? await response.json() : { error: 'Non-JSON response', raw: await response.text() };
+
+        if (!response.ok || data.error) {
+          resultEl.textContent = 'Error: ' + (data.error || 'Request failed');
+        } else {
+          resultEl.textContent = 'Result: ' + (data.result ?? '');
+        }
+
+        rawJsonEl.textContent = JSON.stringify(data, null, 2);
+        rawJsonEl.hidden = false;
+      } catch (err) {
+        resultEl.textContent = 'Error: ' + (err?.message || err);
+      }
+    });
+  </script>
+</body>
+</html>

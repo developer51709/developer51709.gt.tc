@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — John/Dev</title>
+  <meta name="description" content="Contact John/Dev — Developer51709." />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root{--bg:#0f1724;--muted:#9aa4b2;--accent:#6ee7b7;--radius:12px;--max-width:800px;--sans:Inter,system-ui,Arial;}
+    html,body{height:100%;margin:0;font-family:var(--sans);background:var(--bg);color:#e6eef6;}
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:28px;}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);}
+    label{display:block;margin-top:10px;color:var(--muted);font-size:13px;}
+    input,textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:13px;}
+    .btn{display:inline-flex;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#60a5fa);color:#042027;border:0;text-decoration:none;margin-top:12px;}
+    .muted{color:var(--muted);font-size:13px;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:grid;place-items:center;font-weight:700;color:#042027;font-family:ui-monospace,monospace;">J</div>
+      <div>
+        <h1 style="margin:0;font-size:18px;">Contact</h1>
+        <p class="muted" style="margin:6px 0 0 0;">Reach out for collaboration, questions, or API support.</p>
+      </div>
+    </header>
+
+    <main class="card">
+      <h2 style="margin:0 0 8px 0;font-size:16px;">Contact options</h2>
+
+      <h3 style="margin-top:10px;">Discord</h3>
+      <p class="muted">Join the Discord server for quick support, roadmap discussion, and community chat: <a href="https://discord.gg/dV9EyUjFQ2" style="color:inherit;text-decoration:underline;" target="_blank" rel="noopener">Join Discord</a>.</p>
+
+      <h3 style="margin-top:10px;">GitHub</h3>
+      <p class="muted">Report bugs or request features on GitHub: <a href="https://github.com/Developer51709" style="color:inherit;text-decoration:underline;" target="_blank" rel="noopener">github.com/Developer51709</a>. Use issues for reproducible reports and PRs for fixes.</p>
+
+      <h3 style="margin-top:10px;">Email</h3>
+      <p class="muted">Email: <a href="mailto:developer51709@proton.me" style="color:inherit;text-decoration:underline;">developer51709@proton.me</a></p>
+
+      <h3 style="margin-top:12px;">Quick form</h3>
+      <form action="mailto:developer51709@proton.me" method="post" enctype="text/plain">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </main>
+
+    <footer style="margin-top:18px;color:var(--muted);font-size:13px;">© John/Dev · Developer51709</footer>
+  </div>
+</body>
+</html>

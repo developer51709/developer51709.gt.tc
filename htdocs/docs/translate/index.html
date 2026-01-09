@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Translation API (Lingva Mirrors) Documentation</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; background: #0d1b2a; color: #e0e1dd; margin: 0; padding: 0; line-height: 1.6; }
+    header { background: #1b263b; padding: 20px; text-align: center; border-bottom: 4px solid #415a77; }
+    header h1 { margin: 0; color: #e0e1dd; }
+    main { max-width: 960px; margin: 30px auto; padding: 20px; background: #1b263b; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    h2 { color: #81a1c1; border-bottom: 2px solid #415a77; padding-bottom: 5px; }
+    pre { background: #0d1b2a; padding: 15px; border-radius: 6px; overflow-x: auto; color: #a8dadc; }
+    code { font-family: Consolas, monospace; }
+    .flow { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin: 16px 0 24px; }
+    .step { background: #415a77; color: #fff; padding: 10px 14px; border-radius: 6px; margin: 5px; font-weight: bold; white-space: nowrap; }
+    .arrow { margin: 0 10px; color: #a8dadc; font-size: 20px; }
+    .demo { margin-top: 30px; padding: 20px; background: #0d1b2a; border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; margin-top: 6px; color: #e0e1dd; font-size: 14px; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 6px; border: none; border-radius: 4px; background: #415a77; color: #fff; }
+    textarea { min-height: 80px; }
+    button { margin-top: 15px; padding: 10px 20px; background: #81a1c1; border: none; border-radius: 4px; color: #0d1b2a; font-weight: bold; cursor: pointer; }
+    button:hover { background: #a8dadc; }
+    .result { margin-top: 15px; padding: 12px; background: #1b263b; border-radius: 4px; color: #f1faee; word-wrap: break-word; }
+    .json { margin-top: 10px; background: #0d1b2a; border-radius: 6px; padding: 10px; font-family: Consolas, monospace; color: #a8dadc; overflow-x: auto; white-space: pre-wrap; }
+    .note { font-size: 13px; color: #a8dadc; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Translation API (Lingva Mirrors) Documentation</h1>
+  </header>
+  <main>
+    <h2>Overview</h2>
+    <p>
+      This API translates text using multiple <strong>Lingva</strong> mirrors for resilience. It matches Lingva’s input format and automatically falls back across mirrors to ensure successful translation.
+    </p>
+
+    <h2>Endpoint</h2>
+    <p><code>http://developer51709.gt.tc/api/translate.php</code></p>
+
+    <h2>Input format</h2>
+    <p>Matches Lingva’s <code>/api/v1/{source}/{target}/{query}</code> semantics via query params:</p>
+    <ul>
+      <li><code>source</code>: Source language (or <em>auto</em>)</li>
+      <li><code>target</code>: Target language (e.g., <em>es</em>, <em>fr</em>, <em>de</em>)</li>
+      <li><code>query</code>: Text to translate (URL-encoded)</li>
+    </ul>
+
+    <h2>Examples</h2>
+    <h3>Translate English → Spanish</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/translate.php?source=en&target=es&query=Hello%20World</code></pre>
+
+    <h3>Auto-detect → French</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/translate.php?source=auto&target=fr&query=Good%20morning</code></pre>
+
+    <h2>Demo</h2>
+    <div class="demo">
+      <form id="apiForm">
+        <div class="grid">
+          <div>
+            <label for="source">Source language</label>
+            <input type="text" id="source" name="source" value="auto" placeholder="auto or ISO code (e.g., en)">
+          </div>
+          <div>
+            <label for="target">Target language</label>
+            <input type="text" id="target" name="target" value="es" placeholder="ISO code (e.g., es)">
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <label for="query">Text</label>
+            <textarea id="query" name="query" placeholder="Enter text to translate">Hello World</textarea>
+          </div>
+        </div>
+        <button type="submit">Run API</button>
+      </form>
+
+      <div class="result" id="result">Result will appear here…</div>
+      <div class="json" id="rawJson" hidden></div>
+      <p class="note">Tip: The API cycles through Lingva mirrors and returns the first successful translation, including the mirror used.</p>
+    </div>
+
+    <h2>Visual flow</h2>
+    <div class="flow">
+      <div class="step">Query</div>
+      <div class="arrow">→</div>
+      <div class="step">Mirror 1</div>
+      <div class="arrow">→</div>
+      <div class="step">Mirror 2</div>
+      <div class="arrow">→</div>
+      <div class="step">Mirror N</div>
+      <div class="arrow">→</div>
+      <div class="step">Translation</div>
+    </div>
+  </main>
+
+  <script>
+    const endpoint = 'https://developer51709.gt.tc/api/translate.php';
+
+    document.getElementById('apiForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const source = document.getElementById('source').value.trim() || 'auto';
+      const target = document.getElementById('target').value.trim() || 'en';
+      const query  = document.getElementById('query').value.trim();
+
+      const url = `${endpoint}?source=${encodeURIComponent(source)}&target=${encodeURIComponent(target)}&query=${encodeURIComponent(query)}`;
+
+      const resultEl = document.getElementById('result');
+      const rawJsonEl = document.getElementById('rawJson');
+      resultEl.textContent = 'Working…';
+      rawJsonEl.hidden = true;
+
+      try {
+        const response = await fetch(url);
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        const data = isJson ? await response.json() : { error: 'Non-JSON response', raw: await response.text() };
+
+        if (!response.ok || data.error) {
+          resultEl.textContent = 'Error: ' + (data.error || 'Request failed');
+        } else {
+          const out = data.translation ? `${data.translation} (mirror: ${data.mirror || 'n/a'})` : 'No translation';
+          resultEl.textContent = 'Result: ' + out;
+        }
+
+        rawJsonEl.textContent = JSON.stringify(data, null, 2);
+        rawJsonEl.hidden = false;
+      } catch (err) {
+        resultEl.textContent = 'Error: ' + (err?.message || err);
+      }
+    });
+  </script>
+</body>
+</html>

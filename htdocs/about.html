@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — John</title>
+  <meta name="description" content="About John/Dev — developer profile and community links." />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root{--bg:#0f1724;--muted:#9aa4b2;--accent:#6ee7b7;--accent-2:#60a5fa;--radius:12px;--max-width:1100px;--sans:Inter,system-ui,Arial;}
+    html,body{height:100%;margin:0;font-family:var(--sans);background:var(--bg);color:#e6eef6;}
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:28px;}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);}
+    .muted{color:var(--muted);font-size:13px;}
+    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .skill{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-size:13px;color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#042027;font-family:ui-monospace,monospace;">J</div>
+      <div>
+        <h1 style="margin:0;font-size:20px;">About — John/Dev</h1>
+        <p class="muted" style="margin:6px 0 0 0;">Developer, API author, open-source contributor, and community host.</p>
+      </div>
+    </header>
+
+    <main class="card" aria-labelledby="about-title">
+      <h2 id="about-title" style="margin:0 0 8px 0;">Development and community</h2>
+      <p class="muted">I maintain several small APIs and developer tools. Most code is public on GitHub and I welcome issues, pull requests, and collaboration. For real‑time discussion, join the Discord server.</p>
+
+      <h3 style="margin-top:12px;">GitHub</h3>
+      <p class="muted">Primary repo: <a href="https://github.com/Developer51709" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">github.com/Developer51709</a>. Open issues and PRs are the preferred way to request features or report bugs.</p>
+
+      <h3 style="margin-top:12px;">Discord</h3>
+      <p class="muted">Community and support: <a href="https://discord.gg/dV9EyUjFQ2" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Join the Discord server</a>. Use the #support channel for quick help and #roadmap for feature requests.</p>
+
+      <h3 style="margin-top:12px;">How to contribute</h3>
+      <ul class="muted" style="margin-top:8px;">
+        <li>Open an issue on GitHub describing the bug or feature.</li>
+        <li>Fork the repo, make changes, and submit a pull request with tests or examples.</li>
+        <li>Discuss larger changes on Discord before implementing to align on design.</li>
+      </ul>
+    </main>
+
+    <footer style="margin-top:18px;color:var(--muted);font-size:13px;">© John/Dev · Developer51709</footer>
+  </div>
+</body>
+</html>

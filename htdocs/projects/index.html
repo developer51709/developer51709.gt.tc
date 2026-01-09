@@ -1,0 +1,98 @@
+<!Doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects — Developer51709</title>
+  <meta name="description" content="Projects by Developer51709 — demos, tools, and GitHub repos." />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root{
+      --bg:#0f1724; --muted:#9aa4b2; --accent:#6ee7b7; --accent-2:#60a5fa;
+      --radius:12px; --max-width:1100px; --sans:Inter,system-ui,Arial;
+      color-scheme:dark;
+    }
+    html,body{height:100%;margin:0;font-family:var(--sans);background:var(--bg);color:#e6eef6;}
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:28px;}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#042027;font-family:ui-monospace,monospace;}
+    h1{margin:0;font-size:20px;}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:14px;}
+    nav{margin-left:auto;display:flex;gap:10px;}
+    .nav-link{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-size:13px;}
+    .nav-link:hover{color:#fff;background:rgba(255,255,255,0.02);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px;}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;}
+    .card h3{margin:0;font-size:15px;}
+    .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.35;}
+    .actions{margin-top:auto;display:flex;gap:8px;}
+    .btn{display:inline-flex;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042027;text-decoration:none;font-size:13px;}
+    .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);}
+    footer{margin-top:28px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+        <div class="logo">J</div>
+        <div>
+          <h1>Projects</h1>
+          <p class="lead">Demos, tools, and GitHub repos · join the Discord for updates</p>
+        </div>
+      </a>
+      <nav>
+        <a class="nav-link" href="/api">APIs</a>
+        <a class="nav-link" href="/about.html">About</a>
+        <a class="nav-link" href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="grid" aria-label="Projects list">
+        <!-- Encryption Playground -->
+        <!--
+        <article class="card">
+          <h3>Encryption Playground</h3>
+          <p>Interactive demo for the Encryption API. Experiment with Caesar, Vigenère, XOR, and Base64 layers.</p>
+          <div class="actions">
+            <a class="btn" href="/projects/encryption-playground.html">Open</a>
+            <a class="btn ghost" href="https://github.com/Developer51709" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+        -->
+
+        <!-- Utilities Collection -->
+        <article class="card">
+          <h3>Utilities Collection</h3>
+          <p>Small scripts and utilities for automation and developer workflows. Source available on GitHub.</p>
+          <div class="actions">
+            <a class="btn ghost" href="https://github.com/Developer51709" target="_blank" rel="noopener">Repo</a>
+            <a class="btn" href="https://discord.gg/dV9EyUjFQ2" target="_blank" rel="noopener">Discuss on Discord</a>
+          </div>
+        </article>
+
+        <!-- Add more projects here -->
+        <!--
+        <article class="card">
+          <h3>Project Name</h3>
+          <p>Short description of the project.</p>
+          <div class="actions">
+            <a class="btn" href="/projects/project-name.html">Open</a>
+            <a class="btn ghost" href="https://github.com/Developer51709/project-name" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+        -->
+      </section>
+    </main>
+
+    <footer>
+      <div>© John/Dev · Developer51709</div>
+      <div class="muted">GitHub: <a href="https://github.com/Developer51709" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">github.com/Developer51709</a> · Discord: <a href="https://discord.gg/dV9EyUjFQ2" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">join</a></div>
+    </footer>
+  </div>
+</body>
+</html>

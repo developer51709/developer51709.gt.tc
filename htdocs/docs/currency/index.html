@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Converter API Documentation</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; background: #0d1b2a; color: #e0e1dd; margin: 0; padding: 0; line-height: 1.6; }
+    header { background: #1b263b; padding: 20px; text-align: center; border-bottom: 4px solid #415a77; }
+    header h1 { margin: 0; color: #e0e1dd; }
+    main { max-width: 960px; margin: 30px auto; padding: 20px; background: #1b263b; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    h2 { color: #81a1c1; border-bottom: 2px solid #415a77; padding-bottom: 5px; }
+    pre { background: #0d1b2a; padding: 15px; border-radius: 6px; overflow-x: auto; color: #a8dadc; }
+    code { font-family: Consolas, monospace; }
+    .demo { margin-top: 30px; padding: 20px; background: #0d1b2a; border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; margin-top: 6px; color: #e0e1dd; font-size: 14px; }
+    input, select { width: 100%; padding: 8px; margin-top: 6px; border: none; border-radius: 4px; background: #415a77; color: #fff; }
+    button { margin-top: 15px; padding: 10px 20px; background: #81a1c1; border: none; border-radius: 4px; color: #0d1b2a; font-weight: bold; cursor: pointer; }
+    button:hover { background: #a8dadc; }
+    .result { margin-top: 15px; padding: 12px; background: #1b263b; border-radius: 4px; color: #f1faee; word-wrap: break-word; }
+    .json { margin-top: 10px; background: #0d1b2a; border-radius: 6px; padding: 10px; font-family: Consolas, monospace; color: #a8dadc; overflow-x: auto; white-space: pre-wrap; }
+    .note { font-size: 13px; color: #a8dadc; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Currency Converter API Documentation</h1>
+  </header>
+  <main>
+    <h2>Overview</h2>
+    <p>
+      This API converts an amount from one currency to another using live exchange rates. It is lightweight and works on InfinityFree.
+    </p>
+
+    <h2>Endpoint</h2>
+    <p><code>http://developer51709.gt.tc/api/currency.php</code></p>
+
+    <h2>Parameters</h2>
+    <ul>
+      <li><code>from</code>: Source currency code (e.g., <em>USD</em>)</li>
+      <li><code>to</code>: Target currency code (e.g., <em>EUR</em>)</li>
+      <li><code>amount</code>: Numeric value to convert (default: <em>1</em>)</li>
+    </ul>
+
+    <h2>Examples</h2>
+    <h3>Convert 10 USD to EUR</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/currency.php?from=USD&to=EUR&amount=10</code></pre>
+
+    <h3>Convert 100 GBP to JPY</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/currency.php?from=GBP&to=JPY&amount=100</code></pre>
+
+    <h2>Demo</h2>
+    <div class="demo">
+      <form id="apiForm">
+        <div class="grid">
+          <div>
+            <label for="from">From (currency)</label>
+            <input type="text" id="from" name="from" value="USD" placeholder="e.g., USD">
+          </div>
+          <div>
+            <label for="to">To (currency)</label>
+            <input type="text" id="to" name="to" value="EUR" placeholder="e.g., EUR">
+          </div>
+          <div>
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" value="10" step="0.01">
+          </div>
+        </div>
+        <button type="submit">Run API</button>
+      </form>
+
+      <div class="result" id="result">Result will appear here…</div>
+      <div class="json" id="rawJson" hidden></div>
+      <p class="note">Tip: Currency codes follow ISO 4217 (e.g., USD, EUR, JPY).</p>
+    </div>
+  </main>
+
+  <script>
+    const endpoint = 'https://developer51709.gt.tc/api/currency.php';
+
+    document.getElementById('apiForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const from = document.getElementById('from').value.trim();
+      const to = document.getElementById('to').value.trim();
+      const amount = document.getElementById('amount').value;
+
+      const url = `${endpoint}?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&amount=${encodeURIComponent(amount)}`;
+
+      const resultEl = document.getElementById('result');
+      const rawJsonEl = document.getElementById('rawJson');
+      resultEl.textContent = 'Working…';
+      rawJsonEl.hidden = true;
+
+      try {
+        const response = await fetch(url);
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        const data = isJson ? await response.json() : { error: 'Non-JSON response', raw: await response.text() };
+
+        if (!response.ok || data.error) {
+          resultEl.textContent = 'Error: ' + (data.error || 'Request failed');
+        } else {
+          const out = (data.result != null) ? `${data.amount} ${data.from} → ${data.result} ${data.to}` : 'No result';
+          resultEl.textContent = 'Result: ' + out;
+        }
+
+        rawJsonEl.textContent = JSON.stringify(data, null, 2);
+        rawJsonEl.hidden = false;
+      } catch (err) {
+        resultEl.textContent = 'Error: ' + (err?.message || err);
+      }
+    });
+  </script>
+</body>
+</html>

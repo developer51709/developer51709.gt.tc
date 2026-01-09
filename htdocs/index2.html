@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>developer51709</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="developer51709" />
+<meta property="og:description" content="Experience lightning-fast performance with our futuristic operating system." />
+<meta property="og:type" content="website" />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="asset/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  :root {
+    --neon-cyan: #00ffff;
+    --neon-purple: #ff00ff;
+    --neon-yellow: #ffff00;
+    --neon-orange: #ff6600;
+    --dark-bg: #0a0a0a;
+    --medium-bg: #1a1a1a;
+    --light-bg: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --gradient-1: linear-gradient(135deg, #00ffff, #ff00ff);
+    --gradient-2: linear-gradient(135deg, #ff6600, #ffff00);
+    --gradient-dark: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    animation: backgroundPulse 10s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes backgroundPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-1);
+    border-radius: 5px;
+  }
+
+  /* Header */
+  header {
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid transparent;
+    background-image: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), var(--gradient-1);
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    transition: all 0.3s ease;
+  }
+
+  header.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+  }
+
+  .logo::before {
+    content: '⚡';
+    font-size: 2rem;
+    animation: lightning 2s ease-in-out infinite;
+  }
+
+  @keyframes lightning {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--neon-cyan)); }
+    50% { opacity: 0.7; filter: drop-shadow(0 0 20px var(--neon-yellow)); }
+  }
+
+  /* Navigation */
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  nav a, .nav-button {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
+
+  nav a::after, .nav-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-1);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover, .nav-button:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  nav a:hover::after, .nav-button:hover::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--neon-cyan);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  /* Page container */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  /* Hero section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  .hero h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowText 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowText {
+    from { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
+    to { filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.8)); }
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: var(--gradient-1);
+    color: var(--dark-bg);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
+  }
+
+  .btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Floating particles */
+  .particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float 10s infinite;
+  }
+
+  @keyframes float {
+    0% {
+      opacity: 0;
+      transform: translateY(100vh) scale(0);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(90vh) scale(1);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(10vh) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0) scale(0);
+    }
+  }
+
+  /* Sections */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-1);
+    transform: translateX(-50%);
+  }
+
+  /* Features grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    background-image: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)), var(--gradient-1);
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+  }
+
+  .feature-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* Downloads section */
+  .download-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .download-item {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    background-image: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)), var(--gradient-2);
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .download-item:hover::before {
+    left: 100%;
+  }
+
+  .download-info {
+    flex: 1;
+  }
+
+  .download-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--neon-orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .download-details {
+    color: var(--text-secondary);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .download-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .download-detail i {
+    color: var(--neon-cyan);
+  }
+
+  .download-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .download-link {
+    padding: 1rem 2rem;
+    background: var(--gradient-2);
+    color: var(--dark-bg);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 102, 0, 0.6);
+  }
+
+  .download-link.disabled {
+    background: linear-gradient(135deg, #444, #666);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+  }
+
+  .download-link.disabled:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .mobile-warning {
+    display: none;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: #ff6666;
+    text-align: center;
+    animation: warningPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes warningPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* Contact section */
+  .contact-content {
+    text-align: center;
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-content a {
+    font-size: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .contact-content a:hover {
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    transform: scale(1.05);
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(10, 10, 10, 0.9);
+    border-top: 1px solid rgba(0, 255, 255, 0.3);
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+  }
+
+  /* Game page specific styles */
+  #gamePage {
+    padding-top: 80px;
+    min-height: 100vh;
+    background: var(--dark-bg);
+  }
+
+  .game-container {
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .game-ui-element {
+    pointer-events: auto;
+  }
+
+  /* Game menu */
+  .game-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+  }
+
+  .game-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: glowText 2s ease-in-out infinite alternate;
+  }
+
+  .game-button {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    margin: 1rem 0;
+    background: var(--gradient-1);
+    color: var(--dark-bg);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+  }
+
+  .game-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
+  }
+
+  /* Game HUD */
+  .game-hud {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hud-top {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .player-count, .kill-count, .storm-timer {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  .hud-bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .health-shield-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 300px;
+  }
+
+  .health-bar, .shield-bar {
+    height: 30px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .shield-bar {
+    height: 20px;
+    border-color: #0080ff;
+  }
+
+  .health-fill, .shield-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #00ffaa);
+    transition: width 0.3s ease;
+    box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.5);
+  }
+
+  .shield-fill {
+    background: linear-gradient(90deg, #0080ff, #00ffff);
+    box-shadow: inset 0 0 20px rgba(0, 128, 255, 0.5);
+  }
+
+  .inventory {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .inventory-slot {
+    width: 60px;
+    height: 60px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid #444;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .inventory-slot.active {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transform: scale(1.1);
+  }
+
+  /* Mobile controls */
+  .mobile-controls {
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .joystick-container {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(10, 10, 10, 0.5);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .joystick {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  }
+
+  .action-buttons {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 60px);
+    gap: 10px;
+  }
+
+  .action-button {
+    width: 60px;
+    height: 60px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--neon-cyan);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--neon-cyan);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+    }
+
+    nav.show {
+      display: block;
+    }
+
+    nav ul {
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0;
+    }
+
+    nav li {
+      width: 100%;
+    }
+
+    nav a, .nav-button {
+      display: block;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .download-item {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .download-details {
+      justify-content: center;
+    }
+
+    .mobile-warning {
+      display: block;
+    }
+
+    .hud-top {
+      flex-direction: column;
+      gap: 0.5rem;
+      top: 10px;
+    }
+
+    .player-count, .kill-count, .storm-timer {
+      padding: 0.3rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .mobile-controls {
+      display: block;
+    }
+
+    .desktop-only {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .mobile-only {
+      display: none !important;
+    }
+  }
+
+  /* Loading screen */
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+  }
+
+  .loading-content {
+    text-align: center;
+  }
+
+  .loading-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .loading-bar {
+    width: 300px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .loading-progress {
+    height: 100%;
+    background: var(--gradient-1);
+    width: 0;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-content">
+    <div class="loading-logo">John/Dev</div>
+    <div class="loading-bar">
+      <div class="loading-progress" id="loadingProgress"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Animated particles background -->
+<div class="particles" id="particles"></div>
+
+<!-- Header -->
+<header id="header">
+  <div class="header-content">
+    <div class="logo">
+      <h1>John/Dev</h1>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="navbar">
+      <ul>
+        <li><a onclick="showPage('homePage')" class="nav-button">Home</a></li>
+        <li><a onclick="showPage('featuresPage')" class="nav-button">Skills</a></li>
+        <li><a onclick="showPage('downloadsPage')" class="nav-button">Bots</a></li>
+        <li><a onclick="showPage('gamePage')" class="nav-button">Game</a></li>
+        <li><a onclick="showPage('contactPage')" class="nav-button">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Home Page -->
+<div id="homePage" class="page active">
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to my website</h2>
+      <p>subtext coming soon</p>
+      <button class="btn-primary" onclick="showPage('downloadsPage')">Get Started</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h3 class="section-title">About Me:</h3>
+    <div class="feature-card" style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: 1.2rem; line-height: 1.8;">
+        Coming Soon
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- Features Page -->
+<div id="featuresPage" class="page">
+  <section class="section">
+    <h3 class="section-title">Skills</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-title">Skill 1</div>
+        <p>Skill 1 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 2</div>
+        <p>Skill 2 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 3</div>
+        <p>Skill 3 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 4</div>
+        <p>Skill 4 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 5</div>
+        <p>Skill 5 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 6</div>
+        <p>Skill 6 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 7</div>
+        <p>Skill 7 Description</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Skill 8</div>
+        <p>Skill 8 Description</p>
+      </div>
+
+</div>
+    </div>
+  </section>
+</div>
+
+<!-- Downloads Page -->
+<div id="downloadsPage" class="page">
+  <section class="section">
+    <h3 class="section-title">Add my bots:</h3>
+    <div id="mobileWarning" class="mobile-warning mobile-only">
+      <i class="fas fa-exclamation-triangle"></i> Downloads are only available on desktop devices for optimal installation experience.
+    </div>
+    <div class="download-list">
+      <div class="download-item">
+        <div class="download-info">
+          <div class="download-title">Nexus Defender</div>
+          <div class="download-details">
+              <div class="download-detail"></div>
+          </div>
+        </div>
+        <div class="download-buttons">
+          <a href="https://nexus-defender.gt.tc/" class="download-link desktop-only" target="_blank">Learn More</a>
+        <button class="download-link">Learn More<button>
+        </div>
+      </div>
+      
+      <div class="download-item">
+        <div class="download-info">
+          <div class="download-title">Triumphant OS Beta 3</div>
+          <div class="download-details">
+            <div class="download-detail"><i class="fas fa-flask"></i> Beta Version</div>
+            <div class="download-detail"><i class="fas fa-file-archive"></i> 150KB</div>
+            <div class="download-detail"><i class="fas fa-users"></i> Community Built</div>
+          </div>
+        </div>
+        <div class="download-buttons">
+          <a href="https://example.com/" 
+             class="download-link desktop-only" 
+             target="_blank" 
+             download>Download Beta</a>
+          <button class="download-link disabled mobile-only">Desktop Only</button>
+        </div>
+      </div>
+      
+      <div class="download-item">
+        <div class="download-info">
+          <div class="download-title">Triumphant OS Read-Only</div>
+          <div class="download-details">
+            <div class="download-detail"><i class="fas fa-eye"></i> Read-Only Version</div>
+            <div class="download-detail"><i class="fas fa-file-archive"></i> 100KB</div>
+            <div class="download-detail"><i class="fas fa-lock"></i> Demo Mode</div>
+          </div>
+        </div>
+        <div class="download-buttons">
+          <a href="https://example.com/" 
+             class="download-link desktop-only" 
+             target="_blank" 
+             download>Try Demo</a>
+          <button class="download-link disabled mobile-only">Desktop Only</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Game Page -->
+<div id="gamePage" class="page">
+  <div class="game-container">
+    <canvas id="gameCanvas"></canvas>
+    <div class="game-ui">
+      <!-- Game Menu -->
+      <div id="gameMenu" class="game-menu game-ui-element">
+        <h2 class="game-title">⚡ Triumphant Battle Arena ⚡</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Lightning Fast Battle Royale</p>
+        <button class="game-button" onclick="startGame('solo')">Solo Battle</button>
+        <button class="game-button" onclick="startGame('duo')">Duo Battle</button>
+        <button class="game-button" onclick="startGame('squad')">Squad Battle</button>
+        <p style="margin-top: 2rem; color: var(--text-secondary); font-size: 0.9rem;">
+          <span class="desktop-only">WASD: Move | Mouse: Aim | Click: Shoot | Q: Build</span>
+          <span class="mobile-only">Use on-screen controls to play</span>
+        </p>
+      </div>
+
+      <!-- Game HUD -->
+      <div id="gameHUD" class="game-hud">
+        <div class="hud-top">
+          <div class="player-count" id="playerCount">Players: 100</div>
+          <div class="storm-timer" id="stormTimer">Storm: 2:00</div>
+          <div class="kill-count" id="killCount">Kills: 0</div>
+        </div>
+
+        <div class="hud-bottom">
+          <div class="inventory">
+            <div class="inventory-slot active">🔫</div>
+            <div class="inventory-slot">🏹</div>
+            <div class="inventory-slot">🔧</div>
+            <div class="inventory-slot">💊</div>
+            <div class="inventory-slot">🛡️</div>
+          </div>
+          
+          <div class="health-shield-container">
+            <div class="shield-bar">
+              <div class="shield-fill" id="shieldFill" style="width: 50%"></div>
+            </div>
+            <div class="health-bar">
+              <div class="health-fill" id="healthFill" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile controls -->
+        <div class="mobile-controls mobile-only">
+          <div class="joystick-container">
+            <div class="joystick" id="joystick"></div>
+          </div>
+          <div class="action-buttons">
+            <button class="action-button" id="shootBtn">🔫</button>
+            <button class="action-button" id="buildBtn">🔨</button>
+            <button class="action-button" id="jumpBtn">⬆️</button>
+            <button class="action-button" id="reloadBtn">🔄</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Page -->
+<div id="contactPage" class="page">
+  <section class="section">
+    <h3 class="section-title">Get in Touch</h3>
+    <div class="contact-content">
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+        Have questions or need support? We're here to help!
+      </p>
+      <p style="margin-bottom: 1rem;">Email us at:</p>
+      <a href="mailto:help.triumphant@gmail.com">help.triumphant@gmail.com</a>
+    </div>
+  </section>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Triumphant OS. All rights reserved. | Built for the future of computing.</p>
+</footer>
+
+<!-- Three.js -->
+<script src="asset/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+// Page navigation
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+  
+  // Close mobile menu
+  document.getElementById('navbar').classList.remove('show');
+  
+  // Scroll to top
+  window.scrollTo(0, 0);
+  
+  // Initialize game if game page
+  if (pageId === 'gamePage' && !window.gameInitialized) {
+    initGame();
+    window.gameInitialized = true;
+  }
+}
+
+// Mobile menu toggle
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navbar').classList.toggle('show');
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menuToggle');
+  
+  if (!navbar.contains(e.target) && !menuToggle.contains(e.target)) {
+    navbar.classList.remove('show');
+  }
+});
+
+// Header scroll effect
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Create floating particles
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Loading animation
+function showLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  const loadingProgress = document.getElementById('loadingProgress');
+  let progress = 0;
+  
+  const loadingInterval = setInterval(() => {
+    progress += Math.random() * 30;
+    if (progress >= 100) {
+      progress = 100;
+      loadingProgress.style.width = progress + '%';
+      setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 300);
+      clearInterval(loadingInterval);
+    } else {
+      loadingProgress.style.width = progress + '%';
+    }
+  }, 200);
+}
+
+// Mobile download detection
+function checkMobileDownloads() {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // Disable download links on mobile
+    document.querySelectorAll('.download-link').forEach(link => {
+      if (link.classList.contains('desktop-only')) {
+        link.style.display = 'none';
+      }
+    });
+    
+    // Show mobile-only buttons
+    document.querySelectorAll('.mobile-only').forEach(elem => {
+      elem.style.display = 'block';
+    });
+  } else {
+    // Hide mobile warnings on desktop
+    document.querySelectorAll('.mobile-only').forEach(elem => {
+      elem.style.display = 'none';
+    });
+  }
+}
+
+// Game variables
+let scene, camera, renderer;
+let player, controls;
+let enemies = [];
+let buildings = [];
+let projectiles = [];
+let particles = [];
+let gameMode = '';
+let isPlaying = false;
+let health = 100;
+let shield = 50;
+let kills = 0;
+let playersAlive = 100;
+let gameTime = 0;
+let stormRadius = 500;
+
+// Touch controls for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+let joystickActive = false;
+
+// Initialize game
+function initGame() {
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x87CEEB, 100, 1000);
+  
+  // Camera
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+  camera.position.set(0, 15, 30);
+  
+  // Renderer
+  const canvas = document.getElementById('gameCanvas');
+  renderer = new THREE.WebGLRenderer({ 
+    canvas: canvas,
+    antialias: true,
+    alpha: true 
+  });
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+  scene.add(ambientLight);
+  
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(50, 100, 50);
+  directionalLight.castShadow = true;
+  directionalLight.shadow.camera.left = -100;
+  directionalLight.shadow.camera.right = 100;
+  directionalLight.shadow.camera.top = 100;
+  directionalLight.shadow.camera.bottom = -100;
+  scene.add(directionalLight);
+  
+  // Create sky
+  const skyGeometry = new THREE.SphereGeometry(1000, 32, 32);
+  const skyMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      topColor: { value: new THREE.Color(0x0077ff) },
+      bottomColor: { value: new THREE.Color(0xffffff) },
+      offset: { value: 33 },
+      exponent: { value: 0.6 }
+    },
+    vertexShader: `
+      varying vec3 vWorldPosition;
+      void main() {
+        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+        vWorldPosition = worldPosition.xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 topColor;
+      uniform vec3 bottomColor;
+      uniform float offset;
+      uniform float exponent;
+      varying vec3 vWorldPosition;
+      void main() {
+        float h = normalize(vWorldPosition + offset).y;
+        gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
+      }
+    `,
+    side: THREE.BackSide
+  });
+  const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+  scene.add(sky);
+  
+  // Create terrain
+  createTerrain();
+  
+  // Create player
+  createPlayer();
+  
+  // Create buildings
+  createBuildings();
+  
+  // Setup mobile controls
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    setupMobileControls();
+  }
+  
+  // Window resize
+  window.addEventListener('resize', onWindowResize);
+}
+
+function createTerrain() {
+  // Ground
+  const groundGeometry = new THREE.PlaneGeometry(1000, 1000, 50, 50);
+  const groundMaterial = new THREE.MeshLambertMaterial({ 
+    color: 0x3a7d44,
+    roughness: 0.8
+  });
+  
+  // Add height variation
+  const vertices = groundGeometry.attributes.position.array;
+  for (let i = 0; i < vertices.length; i += 3) {
+    vertices[i + 2] = Math.random() * 3 - 1.5;
+  }
+  groundGeometry.computeVertexNormals();
+  
+  const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+  
+  // Trees
+  for (let i = 0; i < 100; i++) {
+    const tree = createTree();
+    tree.position.x = (Math.random() - 0.5) * 800;
+    tree.position.z = (Math.random() - 0.5) * 800;
+    scene.add(tree);
+  }
+}
+
+function createTree() {
+  const tree = new THREE.Group();
+  
+  // Trunk
+  const trunkGeometry = new THREE.CylinderGeometry(2, 3, 15);
+  const trunkMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+  const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+  trunk.position.y = 7.5;
+  trunk.castShadow = true;
+  tree.add(trunk);
+  
+  // Leaves
+  const leavesGeometry = new THREE.ConeGeometry(10, 15, 8);
+  const leavesMaterial = new THREE.MeshLambertMaterial({ color: 0x228B22 });
+  const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
+  leaves.position.y = 20;
+  leaves.castShadow = true;
+  tree.add(leaves);
+  
+  return tree;
+}
+
+function createPlayer() {
+  player = new THREE.Group();
+  
+  // Body
+  const bodyGeometry = new THREE.BoxGeometry(2, 4, 1);
+  const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x0080ff });
+  const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+  body.position.y = 2;
+  body.castShadow = true;
+  player.add(body);
+  
+  // Head
+  const headGeometry = new THREE.SphereGeometry(1);
+  const headMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+  const head = new THREE.Mesh(headGeometry, headMaterial);
+  head.position.y = 5;
+  head.castShadow = true;
+  player.add(head);
+  
+  // Weapon
+  const weaponGeometry = new THREE.BoxGeometry(0.5, 0.5, 3);
+  const weaponMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+  const weapon = new THREE.Mesh(weaponGeometry, weaponMaterial);
+  weapon.position.set(1, 3, 1.5);
+  player.add(weapon);
+  
+  player.position.set(0, 0, 0);
+  player.velocity = new THREE.Vector3();
+  scene.add(player);
+}
+
+function createBuildings() {
+  for (let i = 0; i < 30; i++) {
+    const building = createBuilding();
+    building.position.x = (Math.random() - 0.5) * 600;
+    building.position.z = (Math.random() - 0.5) * 600;
+    buildings.push(building);
+    scene.add(building);
+  }
+}
+
+function createBuilding() {
+  const building = new THREE.Group();
+  
+  const width = 10 + Math.random() * 20;
+  const height = 20 + Math.random() * 40;
+  const depth = 10 + Math.random() * 20;
+  
+  // Main structure
+  const geometry = new THREE.BoxGeometry(width, height, depth);
+  const material = new THREE.MeshLambertMaterial({ 
+    color: new THREE.Color().setHSL(Math.random() * 0.1 + 0.6, 0.3, 0.5)
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.y = height / 2;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  building.add(mesh);
+  
+  return building;
+}
+
+function createEnemy() {
+  const enemy = new THREE.Group();
+  
+  // Body
+  const bodyGeometry = new THREE.BoxGeometry(2, 4, 1);
+  const bodyMaterial = new THREE.MeshLambertMaterial({ 
+    color: new THREE.Color().setHSL(Math.random(), 0.7, 0.5)
+  });
+  const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+  body.position.y = 2;
+  body.castShadow = true;
+  enemy.add(body);
+  
+  // Head
+  const headGeometry = new THREE.SphereGeometry(1);
+  const headMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+  const head = new THREE.Mesh(headGeometry, headMaterial);
+  head.position.y = 5;
+  head.castShadow = true;
+  enemy.add(head);
+  
+  enemy.position.set(
+    (Math.random() - 0.5) * 400,
+    0,
+    (Math.random() - 0.5) * 400
+  );
+  
+  enemy.health = 100;
+  enemy.velocity = new THREE.Vector3();
+  
+  return enemy;
+}
+
+function createProjectile(origin, direction) {
+  const projectile = new THREE.Group();
+  
+  // Bullet
+  const geometry = new THREE.SphereGeometry(0.2);
+  const material = new THREE.MeshBasicMaterial({ 
+    color: 0xffff00,
+    emissive: 0xffff00
+  });
+  const bullet = new THREE.Mesh(geometry, material);
+  projectile.add(bullet);
+  
+  projectile.position.copy(origin);
+  projectile.velocity = direction.clone().multiplyScalar(50);
+  projectile.lifetime = 2;
+  
+  projectiles.push(projectile);
+  scene.add(projectile);
+  
+  // Muzzle flash
+  const flash = new THREE.PointLight(0xffff00, 2, 20);
+  flash.position.copy(origin);
+  scene.add(flash);
+  
+  setTimeout(() => {
+    scene.remove(flash);
+  }, 100);
+}
+
+function createParticleExplosion(position) {
+  for (let i = 0; i < 20; i++) {
+    const particle = new THREE.Mesh(
+      new THREE.SphereGeometry(0.2),
+      new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    );
+    particle.position.copy(position);
+    particle.velocity = new THREE.Vector3(
+      (Math.random() - 0.5) * 10,
+      Math.random() * 10,
+      (Math.random() - 0.5) * 10
+    );
+    particle.lifetime = 1;
+    particles.push(particle);
+    scene.add(particle);
+  }
+}
+
+// Game functions
+function startGame(mode) {
+  gameMode = mode;
+  document.getElementById('gameMenu').style.display = 'none';
+  document.getElementById('gameHUD').style.display = 'block';
+  
+  // Reset game state
+  isPlaying = true;
+  health = 100;
+  shield = 50;
+  kills = 0;
+  playersAlive = 100;
+  gameTime = 0;
+  
+  // Update UI
+  updateUI();
+  
+  // Spawn enemies
+  for (let i = 0; i < 20; i++) {
+    const enemy = createEnemy();
+    enemies.push(enemy);
+    scene.add(enemy);
+  }
+  
+  // Start game loop
+  animate();
+}
+
+function updateGame(deltaTime) {
+  if (!isPlaying) return;
+  
+  gameTime += deltaTime;
+  
+  // Update player
+  updatePlayer(deltaTime);
+  
+  // Update enemies
+  updateEnemies(deltaTime);
+  
+  // Update projectiles
+  updateProjectiles(deltaTime);
+  
+  // Update particles
+  updateParticles(deltaTime);
+  
+  // Update storm
+  updateStorm(deltaTime);
+  
+  // Update UI
+  updateUI();
+  
+  // Check win condition
+  if (playersAlive <= 1 && health > 0) {
+    victory();
+  }
+}
+
+function updatePlayer(deltaTime) {
+  // Apply velocity
+  player.position.add(player.velocity.clone().multiplyScalar(deltaTime));
+  
+  // Friction
+  player.velocity.multiplyScalar(0.9);
+  
+  // Camera follow
+  camera.position.x = player.position.x;
+  camera.position.z = player.position.z + 30;
+  camera.lookAt(player.position);
+  
+  // Storm damage
+  const distanceFromCenter = player.position.length();
+  if (distanceFromCenter > stormRadius) {
+    takeDamage(2 * deltaTime);
+  }
+}
+
+function updateEnemies(deltaTime) {
+  enemies.forEach((enemy, index) => {
+    // Simple AI
+    if (Math.random() < 0.02) {
+      enemy.velocity.x = (Math.random() - 0.5) * 10;
+      enemy.velocity.z = (Math.random() - 0.5) * 10;
+    }
+    
+    enemy.position.add(enemy.velocity.clone().multiplyScalar(deltaTime));
+    
+    // Shoot at player occasionally
+    const distanceToPlayer = enemy.position.distanceTo(player.position);
+    if (distanceToPlayer < 50 && Math.random() < 0.01) {
+      const direction = player.position.clone().sub(enemy.position).normalize();
+      createProjectile(enemy.position.clone().add(new THREE.Vector3(0, 3, 0)), direction);
+    }
+    
+    // Check if dead
+    if (enemy.health <= 0) {
+      scene.remove(enemy);
+      enemies.splice(index, 1);
+      playersAlive--;
+      createParticleExplosion(enemy.position);
+    }
+  });
+}
+
+function updateProjectiles(deltaTime) {
+  projectiles.forEach((projectile, index) => {
+    projectile.position.add(projectile.velocity.clone().multiplyScalar(deltaTime));
+    projectile.lifetime -= deltaTime;
+    
+    // Check collision with enemies
+    enemies.forEach(enemy => {
+      if (projectile.position.distanceTo(enemy.position) < 3) {
+        enemy.health -= 25;
+        createParticleExplosion(projectile.position);
+        scene.remove(projectile);
+        projectiles.splice(index, 1);
+        
+        if (enemy.health <= 0) {
+          kills++;
+        }
+      }
+    });
+    
+    // Check collision with player
+    if (projectile.position.distanceTo(player.position) < 3) {
+      takeDamage(20);
+      createParticleExplosion(projectile.position);
+      scene.remove(projectile);
+      projectiles.splice(index, 1);
+    }
+    
+    // Remove old projectiles
+    if (projectile.lifetime <= 0) {
+      scene.remove(projectile);
+      projectiles.splice(index, 1);
+    }
+  });
+}
+
+function updateParticles(deltaTime) {
+  particles.forEach((particle, index) => {
+    particle.position.add(particle.velocity.clone().multiplyScalar(deltaTime));
+    particle.velocity.y -= 20 * deltaTime; // Gravity
+    particle.lifetime -= deltaTime;
+    
+    if (particle.lifetime <= 0) {
+      scene.remove(particle);
+      particles.splice(index, 1);
+    }
+  });
+}
+
+function updateStorm(deltaTime) {
+  // Shrink storm
+  if (gameTime > 30) {
+    stormRadius = Math.max(50, stormRadius - deltaTime * 5);
+  }
+}
+
+function updateUI() {
+  document.getElementById('healthFill').style.width = health + '%';
+  document.getElementById('shieldFill').style.width = shield + '%';
+  document.getElementById('killCount').textContent = 'Kills: ' + kills;
+  document.getElementById('playerCount').textContent = 'Players: ' + playersAlive;
+  
+  const stormTime = Math.max(0, 120 - gameTime);
+  const minutes = Math.floor(stormTime / 60);
+  const seconds = Math.floor(stormTime % 60).toString().padStart(2, '0');
+  document.getElementById('stormTimer').textContent = 'Storm: ' + minutes + ':' + seconds;
+}
+
+function takeDamage(amount) {
+  if (shield > 0) {
+    const shieldDamage = Math.min(shield, amount);
+    shield -= shieldDamage;
+    amount -= shieldDamage;
+  }
+  
+  health -= amount;
+  
+  if (health <= 0) {
+    gameOver();
+  }
+}
+
+function victory() {
+  isPlaying = false;
+  alert('#1 Victory Royale!\nKills: ' + kills);
+  resetGame();
+}
+
+function gameOver() {
+  isPlaying = false;
+  alert('Game Over!\nYou finished #' + playersAlive);
+  resetGame();
+}
+
+function resetGame() {
+  // Clean up
+  enemies.forEach(enemy => scene.remove(enemy));
+  projectiles.forEach(projectile => scene.remove(projectile));
+  particles.forEach(particle => scene.remove(particle));
+  
+  enemies = [];
+  projectiles = [];
+  particles = [];
+  
+  // Show menu
+  document.getElementById('gameMenu').style.display = 'block';
+  document.getElementById('gameHUD').style.display = 'none';
+}
+
+// Input handling
+const keys = {};
+let mouseX = 0, mouseY = 0;
+
+document.addEventListener('keydown', (e) => {
+  keys[e.key.toLowerCase()] = true;
+});
+
+document.addEventListener('keyup', (e) => {
+  keys[e.key.toLowerCase()] = false;
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isPlaying) return;
+  
+  mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+  
+  if (player) {
+    player.rotation.y = Math.atan2(mouseX, 1) * 0.5;
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!isPlaying) return;
+  
+  if (e.target.classList.contains('game-ui-element') || e.target.closest('.game-ui-element')) {
+    return;
+  }
+  
+  // Shoot
+  const direction = new THREE.Vector3(mouseX, 0, -1).normalize();
+  createProjectile(
+    player.position.clone().add(new THREE.Vector3(0, 3, 0)),
+    direction
+  );
+});
+
+// Mobile controls
+function setupMobileControls() {
+  const joystickContainer = document.querySelector('.joystick-container');
+  const joystick = document.getElementById('joystick');
+  
+  joystickContainer.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    joystickActive = true;
+    const touch = e.touches[0];
+    const rect = joystickContainer.getBoundingClientRect();
+    touchStartX = touch.clientX - rect.left - rect.width / 2;
+    touchStartY = touch.clientY - rect.top - rect.height / 2;
+  });
+  
+  joystickContainer.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (!joystickActive) return;
+    
+    const touch = e.touches[0];
+    const rect = joystickContainer.getBoundingClientRect();
+    let x = touch.clientX - rect.left - rect.width / 2;
+    let y = touch.clientY - rect.top - rect.height / 2;
+    
+    // Limit joystick movement
+    const maxDistance = rect.width / 2 - 25;
+    const distance = Math.sqrt(x * x + y * y);
+    if (distance > maxDistance) {
+      x = (x / distance) * maxDistance;
+      y = (y / distance) * maxDistance;
+    }
+    
+    joystick.style.transform = `translate(${x}px, ${y}px)`;
+    
+    // Update player velocity
+    if (player) {
+      player.velocity.x = x / maxDistance * 10;
+      player.velocity.z = y / maxDistance * 10;
+    }
+  });
+  
+  joystickContainer.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    joystickActive = false;
+    joystick.style.transform = 'translate(0, 0)';
+    if (player) {
+      player.velocity.set(0, 0, 0);
+    }
+  });
+  
+  // Action buttons
+  document.getElementById('shootBtn').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (!isPlaying) return;
+    
+    const direction = new THREE.Vector3(0, 0, -1);
+    createProjectile(
+      player.position.clone().add(new THREE.Vector3(0, 3, 0)),
+      direction
+    );
+  });
+  
+  document.getElementById('jumpBtn').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (player && player.velocity.y === 0) {
+      player.velocity.y = 15;
+    }
+  });
+}
+
+// Keyboard controls for desktop
+function handleKeyboardInput() {
+  if (!isPlaying || !player) return;
+  
+  const speed = 10;
+  
+  if (keys['w'] || keys['arrowup']) {
+    player.velocity.z = -speed;
+  } else if (keys['s'] || keys['arrowdown']) {
+    player.velocity.z = speed;
+  } else {
+    player.velocity.z *= 0.8;
+  }
+  
+  if (keys['a'] || keys['arrowleft']) {
+    player.velocity.x = -speed;
+  } else if (keys['d'] || keys['arrowright']) {
+    player.velocity.x = speed;
+  } else {
+    player.velocity.x *= 0.8;
+  }
+  
+  if (keys[' '] && player.position.y === 0) {
+    player.velocity.y = 15;
+  }
+}
+
+// Animation loop
+let lastTime = 0;
+function animate(currentTime = 0) {
+  requestAnimationFrame(animate);
+  
+  const deltaTime = Math.min((currentTime - lastTime) / 1000, 0.1);
+  lastTime = currentTime;
+  
+  if (deltaTime > 0) {
+    handleKeyboardInput();
+    updateGame(deltaTime);
+  }
+  
+  if (renderer && scene && camera) {
+    renderer.render(scene, camera);
+  }
+}
+
+// Window resize
+function onWindowResize() {
+  if (camera && renderer) {
+    const canvas = document.getElementById('gameCanvas');
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  }
+}
+
+// Initialize on load
+window.addEventListener('load', () => {
+  createParticles();
+  checkMobileDownloads();
+  showLoading();
+});
+</script>
+
+</body>
+</html>

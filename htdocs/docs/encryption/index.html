@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encryption API Documentation</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: #0d1b2a;
+      color: #e0e1dd;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: #1b263b;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #415a77;
+    }
+    header h1 {
+      margin: 0;
+      color: #e0e1dd;
+    }
+    main {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #1b263b;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    h2 {
+      color: #81a1c1;
+      border-bottom: 2px solid #415a77;
+      padding-bottom: 5px;
+    }
+    pre {
+      background: #0d1b2a;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #a8dadc;
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    .flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 16px 0 24px;
+    }
+    .step {
+      background: #415a77;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin: 5px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .arrow {
+      margin: 0 10px;
+      color: #a8dadc;
+      font-size: 20px;
+    }
+    .demo {
+      margin-top: 30px;
+      padding: 20px;
+      background: #0d1b2a;
+      border-radius: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    label {
+      display: block;
+      margin-top: 6px;
+      color: #e0e1dd;
+      font-size: 14px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border: none;
+      border-radius: 4px;
+      background: #415a77;
+      color: #fff;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .checkboxes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 8px 16px;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #81a1c1;
+      border: none;
+      border-radius: 4px;
+      color: #0d1b2a;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #a8dadc;
+    }
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      background: #1b263b;
+      border-radius: 4px;
+      color: #f1faee;
+      word-wrap: break-word;
+    }
+    .json {
+      margin-top: 10px;
+      background: #0d1b2a;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: Consolas, monospace;
+      color: #a8dadc;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .note {
+      font-size: 13px;
+      color: #a8dadc;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Encryption API Documentation</h1>
+  </header>
+  <main>
+    <h2>Overview</h2>
+    <p>
+      This API provides modular encryption and decryption using
+      <strong>Caesar</strong>, <strong>Vigenère</strong>, <strong>XOR</strong>, and optional <strong>Base64</strong>.
+      Enable or disable any combination using flags. Order of operations is fixed:<br>
+      <em><strong>Encryption: Caesar → Vigenère → XOR → Base64</strong></em><br>
+      <em><strong>Decryption: Base64 → XOR → Vigenère → Caesar</strong></em>
+    </p>
+
+    <h2>Endpoint</h2>
+    <p><code>http://developer51709.gt.tc/api/encryption.php</code></p>
+
+    <h2>Visual flow</h2>
+    <h3>Encryption</h3>
+    <div class="flow">
+      <div class="step">Plaintext</div>
+      <div class="arrow">→</div>
+      <div class="step">Caesar</div>
+      <div class="arrow">→</div>
+      <div class="step">Vigenère</div>
+      <div class="arrow">→</div>
+      <div class="step">XOR</div>
+      <div class="arrow">→</div>
+      <div class="step">Base64</div>
+      <div class="arrow">→</div>
+      <div class="step">Ciphertext</div>
+    </div>
+
+    <h3>Decryption</h3>
+    <div class="flow">
+      <div class="step">Ciphertext</div>
+      <div class="arrow">→</div>
+      <div class="step">Base64 decode</div>
+      <div class="arrow">→</div>
+      <div class="step">XOR</div>
+      <div class="arrow">→</div>
+      <div class="step">Vigenère (reverse)</div>
+      <div class="arrow">→</div>
+      <div class="step">Caesar (reverse)</div>
+      <div class="arrow">→</div>
+      <div class="step">Plaintext</div>
+    </div>
+
+    <h2>Parameters</h2>
+    <ul>
+      <li><code>mode</code>: <em>encrypt</em> or <em>decrypt</em></li>
+      <li><code>text</code>: Input text (plaintext for encrypt; ciphertext for decrypt)</li>
+      <li><code>caesarShift</code>: Integer shift for Caesar</li>
+      <li><code>vigenereKey</code>: Alphabetic ASCII key for Vigenère</li>
+      <li><code>xorKey</code>: ASCII key string for XOR</li>
+      <li><code>useCaesar</code>: true/false (enable Caesar)</li>
+      <li><code>useVigenere</code>: true/false (enable Vigenère)</li>
+      <li><code>useXor</code>: true/false (enable XOR)</li>
+      <li><code>useBase64</code>: true/false (encode output on encrypt; decode input on decrypt)</li>
+    </ul>
+    <p class="note">Keys are validated as single-line ASCII. If a layer is disabled, its step is skipped.</p>
+
+    <h2>Examples</h2>
+    <h3>Encrypt with Caesar + Base64</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/encryption.php?mode=encrypt&text=HELLO&caesarShift=3&useCaesar=true&useBase64=true</code></pre>
+
+    <h3>Decrypt with Vigenère + XOR</h3>
+    <pre><code class="language-bash">http://developer51709.gt.tc/api/encryption.php?mode=decrypt&text=&lt;cipher&gt;&vigenereKey=KEY&xorKey=abc&useVigenere=true&useXor=true</code></pre>
+
+    <h2>Demo</h2>
+    <div class="demo">
+      <form id="apiForm">
+        <div class="grid">
+          <div>
+            <label for="mode">Mode</label>
+            <select id="mode" name="mode">
+              <option value="encrypt">Encrypt</option>
+              <option value="decrypt">Decrypt</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="text">Text</label>
+            <input type="text" id="text" name="text" placeholder="Enter text or ciphertext">
+          </div>
+
+          <div>
+            <label for="caesarShift">Caesar shift</label>
+            <input type="number" id="caesarShift" name="caesarShift" value="3">
+          </div>
+
+          <div>
+            <label for="vigenereKey">Vigenère key</label>
+            <input type="text" id="vigenereKey" name="vigenereKey" value="KEY">
+          </div>
+
+          <div>
+            <label for="xorKey">XOR key</label>
+            <input type="text" id="xorKey" name="xorKey" value="abc">
+          </div>
+        </div>
+
+        <div class="checkboxes">
+          <label><input type="checkbox" id="useCaesar"> Use Caesar</label>
+          <label><input type="checkbox" id="useVigenere"> Use Vigenère</label>
+          <label><input type="checkbox" id="useXor"> Use XOR</label>
+          <label><input type="checkbox" id="useBase64"> Use Base64</label>
+        </div>
+
+        <button type="submit">Run API</button>
+      </form>
+
+      <div class="result" id="result">Result will appear here…</div>
+      <div class="json" id="rawJson" hidden></div>
+      <p class="note" id="hint">Tip: For decryption, set the same flags used on encryption. If Base64 was enabled, keep it enabled.</p>
+    </div>
+  </main>
+
+  <script>
+    const endpoint = 'http://developer51709.gt.tc/api/encryption.php';
+
+    function sanitizeAscii(str) {
+      if (typeof str !== 'string') return '';
+      // Keep printable ASCII and strip newlines
+      return str.replace(/[^\x20-\x7E]/g, '').replace(/[\r\n]/g, '');
+    }
+
+    document.getElementById('apiForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const mode = document.getElementById('mode').value;
+      const text = document.getElementById('text').value;
+      const caesarShift = document.getElementById('caesarShift').value;
+      const vigenereKey = sanitizeAscii(document.getElementById('vigenereKey').value);
+      const xorKey = sanitizeAscii(document.getElementById('xorKey').value);
+      const useCaesar = document.getElementById('useCaesar').checked;
+      const useVigenere = document.getElementById('useVigenere').checked;
+      const useXor = document.getElementById('useXor').checked;
+      const useBase64 = document.getElementById('useBase64').checked;
+
+      const payload = { mode, text, caesarShift, vigenereKey, xorKey, useCaesar, useVigenere, useXor, useBase64 };
+
+      const resultEl = document.getElementById('result');
+      const rawJsonEl = document.getElementById('rawJson');
+      const hintEl = document.getElementById('hint');
+
+      resultEl.textContent = 'Working…';
+      rawJsonEl.hidden = true;
+      hintEl.textContent = mode === 'decrypt'
+        ? 'Tip: Match flags to the ones used during encryption. If Base64 was enabled, keep it enabled.'
+        : 'Tip: Toggle any combination of layers. Output may be raw or Base64 depending on the toggle.';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        if (!isJson) {
+          const textErr = await response.text();
+          resultEl.textContent = 'Error: Non-JSON response';
+          rawJsonEl.textContent = textErr;
+          rawJsonEl.hidden = false;
+          return;
+        }
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          const msg = (data && (data.error || data.message)) ? (data.error || data.message) : 'Request failed';
+          resultEl.textContent = 'Error: ' + msg;
+        } else {
+          resultEl.textContent = 'Result: ' + (data.result ?? '');
+        }
+
+        rawJsonEl.textContent = JSON.stringify(data, null, 2);
+        rawJsonEl.hidden = false;
+      } catch (err) {
+        resultEl.textContent = 'Error: ' + (err?.message || err);
+        rawJsonEl.textContent = String(err);
+        rawJsonEl.hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>
