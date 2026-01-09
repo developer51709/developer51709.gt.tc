@@ -19,6 +19,7 @@ jobs:
           mkdir mirror
 
           wget \
+            --user-agent="Mozilla/5.0" \
             --mirror \
             --convert-links \
             --adjust-extension \
