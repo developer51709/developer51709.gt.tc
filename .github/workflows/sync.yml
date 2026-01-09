@@ -1,0 +1,51 @@
+name: Sync Website
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Choose 'pull' (download) or 'push' (upload)"
+        required: true
+        default: "pull"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # PULL MODE: Download files from InfinityFree → GitHub
+      - name: Pull from InfinityFree
+        if: ${{ github.event.inputs.mode == 'pull' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /htdocs/
+          direction: download
+
+      # PUSH MODE: Upload files from GitHub → InfinityFree
+      - name: Push to InfinityFree
+        if: ${{ github.event.inputs.mode == 'push' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /htdocs/
+          direction: upload
+
+      # Commit pulled files back to GitHub
+      - name: Commit changes (pull mode only)
+        if: ${{ github.event.inputs.mode == 'pull' }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Pulled website from InfinityFree" || echo "No changes"
+          git push
