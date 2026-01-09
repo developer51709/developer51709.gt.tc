@@ -31,7 +31,7 @@ jobs:
       # PUSH MODE: Upload files from GitHub → InfinityFree
       - name: Push to InfinityFree
         if: ${{ github.event.inputs.mode == 'push' }}
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
